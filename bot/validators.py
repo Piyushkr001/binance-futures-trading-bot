@@ -24,6 +24,8 @@ def validate_order_input(symbol, side, order_type, quantity, price=None):
             raise ValueError("Price is required for LIMIT order.")
         if price <= 0:
             raise ValueError("Price must be greater than 0 for LIMIT order.")
+    elif order_type == "MARKET":
+        price = None
 
     return {
         "symbol": symbol,

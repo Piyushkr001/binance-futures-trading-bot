@@ -1,4 +1,7 @@
 venv/
 .env
 __pycache__/
-*.pyc.env
+*.pyc
+.DS_Store
+__MACOSX/
+.pytest_cache/

@@ -51,6 +51,12 @@ def main():
     api_secret = os.getenv("BINANCE_API_SECRET")
     base_url = os.getenv("BINANCE_BASE_URL", "https://testnet.binancefuture.com")
 
+    if not api_key or not api_secret:
+        print("\nError: API credentials are missing.")
+        print("Please ensure BINANCE_API_KEY and BINANCE_API_SECRET are set in your .env file.")
+        logger.error("Missing API credentials.")
+        return
+
     try:
         print_order_summary(
             symbol=args.symbol.upper(),

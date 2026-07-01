@@ -66,7 +66,9 @@ class BinanceFuturesClient:
             )
 
             if response.status_code >= 400:
-                raise BinanceAPIError(data)
+                error_msg = data.get("msg", data.get("raw_response", "Unknown API error"))
+                error_code = data.get("code", response.status_code)
+                raise BinanceAPIError(f"[{error_code}] {error_msg}")
 
             return data
 
@@ -82,7 +84,7 @@ class BinanceFuturesClient:
             "quantity": quantity,
         }
 
-        if order_type == "LIMIT":
+        if order_type == "LIMIT" and price is not None:
             params["price"] = price
             params["timeInForce"] = "GTC"
 
